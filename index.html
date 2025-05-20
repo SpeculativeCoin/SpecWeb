@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Speculative Coin (SPEC)</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: 'Press Start 2P', monospace;
@@ -71,6 +72,13 @@
     .cta-button:hover {
       background-color: #00cc7a;
     }
+    #chart-section, #minigame-section {
+      margin-top: 4rem;
+    }
+    canvas {
+      background: #fff;
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -81,7 +89,7 @@
   </header>
 
   <section class="graypaper">
-    <h2>📄 The SPEC Graypaper (v1.0)</h2>
+   <h2>📄 The SPEC Graypaper (v1.0)</h2>
 
     <h3>🧠 What Is SPEC?</h3>
     <p>Speculative Coin (SPEC) is a Solana-based meme token with no roadmap, no utility, no backing, and no apologies. It was born from a dream — the dream that maybe, just maybe, something completely useless could go to the moon.</p>
@@ -142,9 +150,51 @@
     <p>Join us. Probably.</p>
   </section>
 
+  <section id="chart-section">
+    <h2>📊 SPECulation Chart</h2>
+    <canvas id="specChart" width="400" height="200"></canvas>
+  </section>
+
+  <section id="minigame-section">
+    <h2>🎮 SPEC Clicker Mini-Game</h2>
+    <p>Click to speculate! The more you click, the higher your speculative value!</p>
+    <p><strong>SPEC Score: <span id="score">0</span></strong></p>
+    <button class="cta-button" onclick="specClick()">Speculate</button>
+  </section>
+
   <footer>
     <p>Follow us on <a href="https://twitter.com/SPEC_CoinMeme" target="_blank">Twitter</a> | Join the chaos on <a href="https://t.me/SPECULATIVECOIN" target="_blank">Telegram</a></p>
     <p>&copy; 2025 Speculative Coin</p>
   </footer>
+
+  <script>
+    const ctx = document.getElementById('specChart').getContext('2d');
+    const specChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
+        datasets: [{
+          label: 'Speculation Level',
+          data: [10, 50, 30, 90, 200],
+          borderColor: '#00ff99',
+          backgroundColor: 'rgba(0, 255, 153, 0.1)',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    let score = 0;
+    function specClick() {
+      score++;
+      document.getElementById('score').innerText = score;
+    }
+  </script>
 </body>
-</html
+</html>
